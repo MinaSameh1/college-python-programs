@@ -10,7 +10,24 @@ import tkinter
 
 @dataclass
 class Pixel():
-    """ Just a Pixel on the screen xd """
+    """
+    A class representing Pixels
+
+    ...
+
+    Attributes
+    ----------
+    point_x:
+        the X coordinate value
+
+    point_Y:
+        the Y coordinate value
+
+    Methods
+    -------
+    get_points:
+        returns a list with the X,Y points
+    """
     point_x: float
     point_y: float
 
@@ -18,20 +35,20 @@ class Pixel():
         self.point_x = point_x
         self.point_y = point_y
 
-    def get_points(self) -> list:
-        """ Returns point as list  """
+    def get_points(self) -> list[float]:
+        """ Returns point(x,y) as list of floats  """
         return [self.point_x, self.point_y]
 
 
-def breseham(point: Pixel, point1: Pixel) -> list:
+def breseham(point: Pixel, point1: Pixel) -> list[Pixel]:
     """ It calculates Pixels for bresenham
 
     :point: First Point
     :point2: Second Point
-    :returns: A list of points that will be drawn :)
+    :returns: A list of `Pixel`s that will be drawn :)
 
     """
-    points_to_be_drawn: list = []
+    points_to_be_drawn: list[Pixel] = []
     # First GET dX and dY
     delta_x: float = point1.point_x - point.point_x
     delta_y: float = point1.point_y - point.point_y
@@ -64,7 +81,7 @@ def breseham(point: Pixel, point1: Pixel) -> list:
     return points_to_be_drawn
 
 
-def draw(lst_of_points: list, scale: int) -> None:
+def draw(lst_of_points: list[Pixel], scale: int) -> None:
     """ Will draw the line and points on a tkinter window
 
     :point: First point that will be used to draw the line
@@ -101,7 +118,7 @@ def main():
     """Main"""
     point0: Pixel = Pixel(2, 3)
     point1: Pixel = Pixel(15, 8)
-    lst: list = breseham(point0, point1)
+    lst: list[Pixel] = breseham(point0, point1)
     print(lst)
     draw(lst, 40)
 
