@@ -7,6 +7,7 @@ import getopt
 import textwrap
 from collections import Counter
 import numpy as np
+import logging
 import re
 
 # Taken from Dr Ahmed Negm Book
@@ -104,7 +105,7 @@ def get_all_indicies(enc_words) -> list:
                 if len(find) > 1:  # if list not empty
                     list_of_indicies.append(list(map(lambda x: x * i, find)))
                     found_words.append(enc_words[j:j+i])
-        print(found_words)
+        logging.info("FoundWords:%s", found_words)
     return list_of_indicies
 
 
@@ -176,6 +177,7 @@ def decode_vigenere_without_key(enc_words):
     gets the key and its length
         args:lst that will be decoded
     """
+    logging.debug("Enc Words:%s", enc_words)
     print(get_possible_keys(enc_words))
 
 
@@ -205,4 +207,8 @@ def main(argv) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    logging.basicConfig(filename='vigenere.log', level=logging.DEBUG)
+    logging.debug("Starting -------------------------------------------------")
+    sys.exit({
+        main(sys.argv[1:])
+    })
