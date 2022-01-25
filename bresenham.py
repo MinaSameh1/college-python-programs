@@ -9,7 +9,7 @@ import tkinter
 
 
 @dataclass
-class Pixel():
+class Pixel:
     """
     A class representing Pixels
 

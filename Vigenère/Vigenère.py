@@ -48,26 +48,6 @@ def factors(num):
                              if num % i == 0) for x in tup)
 
 
-def indiciess(lst, element) -> list:
-    """ Function that searchs list
-    and returns occurances of item
-        args:
-            lst: List that will be searched in
-            element: Element to find occurance of
-        returns:
-            list of occurances
-    """
-    result = []
-    offset = -1
-    while True:
-        try:
-            offset = lst.index(element, offset+1)
-        # Exit
-        except ValueError:
-            return result
-        result.append(offset)
-
-
 def get_percent_dict(dict_orig) -> dict:
     """ Function that takes a dict and returns the percentage
     sorted
@@ -82,8 +62,7 @@ def get_percent_dict(dict_orig) -> dict:
         pct = value * 100.0 / sum_of_factors
         dict_percent[key] = pct
     sortdict = sorted(dict_percent.items(), key=lambda x: x[1], reverse=True)
-    sortdict = dict(sortdict)
-    return sortdict
+    return dict(sortdict)
 
 
 def get_all_indicies(enc_words) -> list:
@@ -123,7 +102,7 @@ def get_possible_keys(enc_words) -> tuple:
 
     list_of_indicies = get_all_indicies(enc_words)
     # Get factors of the numbers
-    dict_of_factors = {}
+    dict_of_factors: dict[int, int] = {}
     for list_of_same_word_index in list_of_indicies:
         # First get the difference between them
         diff = np.diff(list_of_same_word_index)[0]
@@ -153,13 +132,13 @@ def get_possible_keys(enc_words) -> tuple:
         enc_words_divided = textwrap.wrap(enc_words, key)
         for i in range(0, key):
             # at the end you will have some left overs just ignore them for now
-            letters = [x[i] if len(x) == key else x[i % len(x)]
+            list_of_letters: list[str] = [x[i] if len(x) == key else x[i % len(x)]
                        for x in enc_words_divided]
             # Get the first letter and then consider it E, shift it by E
             # We use this function as a desencding sorter
-            letters = get_percent_dict(Counter(letters))
-            print(letters)
-            most_used_letter = list(letters.keys())[0]
+            letters_percent: dict[str, int] = get_percent_dict(Counter(list_of_letters))
+            print(letters_percent)
+            most_used_letter = list(letters_percent.keys())[0]
             print(f"LETTER 0:{most_used_letter}")
             key_letters += chr(
                 (
