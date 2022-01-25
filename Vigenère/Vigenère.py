@@ -2,13 +2,14 @@
 This is a program for Dr. Ahmed Negm on Vigenere getting key length
 """
 
-import sys
-import getopt
-import textwrap
 from collections import Counter
-import numpy as np
+import getopt
 import logging
 import re
+import sys
+import textwrap
+
+import numpy as np
 
 # Taken from Dr Ahmed Negm Book
 freq_english_letters = {
